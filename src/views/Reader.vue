@@ -308,10 +308,9 @@ export default {
       this.$nextTick(() => {
         this.windowSizeHandler()
         this.containerScroll = new PerfectScrollbar(this.$refs.book, {
-          wheelSpeed: 1,
+          wheelSpeed: 2,
           wheelPropagation: true,
-          minScrollbarLength: 20,
-          maxScrollbarLength: 100
+          minScrollbarLength: 20
         })
       })
     },
