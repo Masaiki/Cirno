@@ -1,5 +1,5 @@
 {
-  "name": "koa-starter",
+  "name": "cirno",
   "version": "1.0.0",
   "description": "",
   "main": "sls.js",
@@ -16,5 +16,13 @@
     "koa2-cors": "^2.0.6",
     "koa-router": "^8.0.8",
     "koa-sendfile": "^2.0.1"
+  },
+  "bin": "./sls.js",
+  "pkg": {
+    "targets": [
+      "node12-macos-x64",
+      "node12-win-x64",
+      "node12-linux-x64"
+    ]
   }
 }

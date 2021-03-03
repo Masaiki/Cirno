@@ -98,7 +98,9 @@ router.get(`/api/*`, async (ctx, next) => {
 })
 
 app.use(router.allowedMethods()).use(router.routes())
-// app.listen(9612);
+app.listen(9612, () => {
+  console.log("程序启动成功，请在api-host中填入 http://localhost:9612/api");
+});
 // console.log("启动成功，监听端口：9612");
 // don't forget to export!
 module.exports = app
