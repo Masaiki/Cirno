@@ -226,8 +226,8 @@ export default {
               book.update_chapters = book.book_info.last_chapter_info.chapter_index - this.last_books_info[book.book_info.book_id].last_chapter_index
             else
               this.last_books_info[book.book_info.book_id] = {last_chapter_index:book.book_info.last_chapter_info.chapter_index}
-              window.localStorage.books = JSON.stringify(this.last_books_info)
           }
+          window.localStorage.books = JSON.stringify(this.last_books_info)
           this.$nextTick(() => {
             this.loadStatus = 1
           })
