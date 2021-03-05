@@ -84,7 +84,7 @@ export default {
   },
   async created() {
     let baseUrl = localStorage.getItem('baseUrl')
-    console.log(baseUrl)
+    // console.log(baseUrl)
     if (!baseUrl) {
       this.$store.commit('baseUrl', baseUrl)
     }
@@ -96,7 +96,7 @@ export default {
       urlParas: {}
     }).then(
       res => {
-        console.log(res)
+        // console.log(res)
         let hbooker_shelves = res
         this.hbooker_shelves = hbooker_shelves.data.shelf_list
         this.currentShelfId = this.hbooker_shelves[0].shelf_id
@@ -126,7 +126,7 @@ export default {
         }
       }).then(
         res => {
-          console.log(res)
+          // console.log(res)
           this.book_list = res.data.book_list
           this.loadingBooks = 1
           this.$nextTick(() => {

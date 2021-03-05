@@ -68,7 +68,7 @@ export default {
         }
       }).then(
         res => {
-          console.log(res)
+          // console.log(res)
           localStorage.setItem('login_token', res.data.login_token)
           localStorage.setItem('account', res.data.reader_info.account)
           if (this.remUser) {

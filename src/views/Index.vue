@@ -84,15 +84,15 @@ export default {
     }
   },
   async created() {
-    console.log('----')
-    console.log(this.$route.params.forceReload)
+    // console.log('----')
+    // console.log(this.$route.params.forceReload)
     if (this.$route.params.forceReload) {
       this.refreshBooks()
     }
     let info = await this.getInfo()
     if (info) {
-      this.refreshBooks()
       this.last_books_info = window.localStorage.books?JSON.parse(window.localStorage.books) : {}
+      this.refreshBooks()
     }
   },
   mounted() {},
@@ -155,7 +155,7 @@ export default {
         url: '/task/get_sign_record'
       })
       sign_record_list = sign_record_list.data.sign_record_list
-      console.log(sign_record_list)
+      // console.log(sign_record_list)
       let date = new Date()
       let today = date.getDay()
       let dayArr = [6, 0, 1, 2, 3, 4, 5]
@@ -199,7 +199,7 @@ export default {
         urlParas: {}
       }).then(
         res => {
-          console.log(res.data.shelf_list)
+          // console.log(res.data.shelf_list)
           return res.data.shelf_list
         },
         err => {

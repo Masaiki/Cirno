@@ -275,7 +275,7 @@ export default {
       })
       chapter_info.data.chapter_info.txt_content = this.decrypt(chapter_info.data.chapter_info.txt_content, key)
       this.chapter_info = chapter_info.data.chapter_info
-      console.log(this.chapter_info)
+      // console.log(this.chapter_info)
       if (this.chapter_info.auth_access == 1) {
         this.auth = true
         this.setLastRead()
