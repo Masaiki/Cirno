@@ -28,7 +28,9 @@
     <div class="books-wrapper" v-else-if="loadStatus === 1">
       <div class="books">
         <div class="book" v-for="book in book_list" :key="book.id">
-          <img class="book-cover" :src="book.book_info.cover" @click="gotoBook(book)" />
+          <a-badge :count="book.update_chapters">
+            <img class="book-cover" :src="book.book_info.cover" @click="gotoBook(book)" />
+          </a-badge>
           <div class="book-name">{{ book.book_info.book_name }}</div>
           <a-button type="danger" v-show="deleteMode" @click="deleteBook(book)">从书架中删除</a-button>
         </div>
@@ -71,6 +73,7 @@ export default {
     return {
       shelves: [],
       book_list: [],
+      last_books_info: null,
       currentShelfId: null,
       avatar: this.$store.state.reader_info.avatar_thumb_url,
       checkIn: false,
@@ -89,6 +92,7 @@ export default {
     let info = await this.getInfo()
     if (info) {
       this.refreshBooks()
+      this.last_books_info = window.localStorage.books?JSON.parse(window.localStorage.books) : {}
     }
   },
   mounted() {},
@@ -217,6 +221,13 @@ export default {
       }).then(
         res => {
           this.book_list = res.data.book_list
+          for (let book of this.book_list) {
+            if (this.last_books_info[book.book_info.book_id])
+              book.update_chapters = book.book_info.last_chapter_info.chapter_index - this.last_books_info[book.book_info.book_id].last_chapter_index
+            else
+              this.last_books_info[book.book_info.book_id] = {last_chapter_index:book.book_info.last_chapter_info.chapter_index}
+              window.localStorage.books = JSON.stringify(this.last_books_info)
+          }
           this.$nextTick(() => {
             this.loadStatus = 1
           })
@@ -228,6 +239,8 @@ export default {
       )
     },
     gotoBook(book) {
+      this.last_books_info[book.book_info.book_id].last_chapter_index = book.book_info.last_chapter_info.chapter_index
+      window.localStorage.books = JSON.stringify(this.last_books_info)
       this.$router.push({
         name: 'Book',
         query: {

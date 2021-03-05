@@ -14,7 +14,8 @@ import {
   Checkbox,
   Popover,
   Dropdown,
-  Spin
+  Spin,
+  Badge
 } from 'ant-design-vue'
 Vue.use(Pagination)
 Vue.use(Button)
@@ -32,4 +33,5 @@ Vue.use(Checkbox)
 Vue.use(Popover)
 Vue.use(Dropdown)
 Vue.use(Spin)
+Vue.use(Badge)
 Vue.prototype.$message = message
