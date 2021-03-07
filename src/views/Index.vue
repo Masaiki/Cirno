@@ -15,7 +15,7 @@
         <div class="change-shelf option-icon" @click="beginCheckIn(checkIn)">
           <i :class="{ 'ri-calendar-check-line': checkIn, 'ri-calendar-line': !checkIn }"></i>
         </div>
-        <div class="change-shelf option-icon" @click="gotoSearch">
+        <div class="change-shelf option-icon" @click="openSearchModal">
           <i class="ri-search-2-line"></i>
         </div>
         <div class="change-shelf option-icon" @click="gotoSettings">
@@ -63,11 +63,14 @@
         </div>
       </div>
     </a-modal>
+    <search ref="search" :currentShelfId="currentShelfId" @refresh="refreshBooksPure" />
   </div>
 </template>
 
 <script>
+import Search from '../components/search.vue'
 export default {
+  components: { Search },
   name: 'Shelf',
   data() {
     return {
@@ -91,17 +94,17 @@ export default {
     }
     let info = await this.getInfo()
     if (info) {
-      this.last_books_info = window.localStorage.books?JSON.parse(window.localStorage.books) : {}
+      this.last_books_info = window.localStorage.books ? JSON.parse(window.localStorage.books) : {}
       this.refreshBooks()
     }
   },
   mounted() {},
   computed: {},
   methods: {
-    changeDeleteMode(){
+    changeDeleteMode() {
       this.deleteMode = !this.deleteMode
     },
-    deleteBook(book){
+    deleteBook(book) {
       this.$get({
         url: '/bookshelf/delete_shelf_book',
         urlParas: {
@@ -110,7 +113,7 @@ export default {
         }
       }).then(
         res => {
-          this.$message.info(book.book_info.book_name+' 已从书架 '+this.currentShelfId+' 中删除')
+          this.$message.info(book.book_info.book_name + ' 已从书架 ' + this.currentShelfId + ' 中删除')
           this.refreshBooks()
         },
         err => {}
@@ -126,6 +129,9 @@ export default {
         this.currentShelfId === null ? (this.currentShelfId = this.shelves[0]['shelf_id']) : null
         this.getBooks()
       }
+    },
+    refreshBooksPure() {
+      this.getBooks()
     },
     refreshPage() {
       this.loadStatus = 0
@@ -183,6 +189,9 @@ export default {
     openShelfModal() {
       this.shelfModal = true
     },
+    openSearchModal() {
+      this.$refs.search.showSearch()
+    },
     changeShelf(id) {
       this.shelfModal = false
       if (id === this.currentShelfId) {
@@ -223,9 +232,13 @@ export default {
           this.book_list = res.data.book_list
           for (let book of this.book_list) {
             if (this.last_books_info[book.book_info.book_id])
-              book.update_chapters = book.book_info.last_chapter_info.chapter_index - this.last_books_info[book.book_info.book_id].last_chapter_index
+              book.update_chapters =
+                book.book_info.last_chapter_info.chapter_index -
+                this.last_books_info[book.book_info.book_id].last_chapter_index
             else
-              this.last_books_info[book.book_info.book_id] = {last_chapter_index:book.book_info.last_chapter_info.chapter_index}
+              this.last_books_info[book.book_info.book_id] = {
+                last_chapter_index: book.book_info.last_chapter_info.chapter_index
+              }
           }
           window.localStorage.books = JSON.stringify(this.last_books_info)
           this.$nextTick(() => {
