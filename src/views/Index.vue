@@ -114,7 +114,7 @@ export default {
       }).then(
         res => {
           this.$message.info(book.book_info.book_name + ' 已从书架 ' + this.currentShelfId + ' 中删除')
-          this.refreshBooks()
+          this.getBooks()
         },
         err => {}
       )
