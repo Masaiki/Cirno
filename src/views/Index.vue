@@ -63,7 +63,7 @@
         </div>
       </div>
     </a-modal>
-    <search ref="search" :currentShelfId="currentShelfId" @refresh="refreshBooksPure" />
+    <search ref="search" :currentShelfId="currentShelfId" @refresh="getBooks" />
   </div>
 </template>
 
@@ -129,9 +129,6 @@ export default {
         this.currentShelfId === null ? (this.currentShelfId = this.shelves[0]['shelf_id']) : null
         this.getBooks()
       }
-    },
-    refreshBooksPure() {
-      this.getBooks()
     },
     refreshPage() {
       this.loadStatus = 0
