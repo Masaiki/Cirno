@@ -262,9 +262,6 @@ export default {
         }
       })
     },
-    gotoSearch() {
-      this.$router.push({ name: 'Search' })
-    },
     gotoSettings() {
       this.$router.push({ name: 'Settings' })
     }
