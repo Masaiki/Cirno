@@ -56,7 +56,7 @@ export default {
           this.$nextTick(() => {
             try {
               this.shelfScroll = new PerfectScrollbar(this.$refs.booksContainer, {
-                wheelSpeed: 2,
+                wheelSpeed: 1,
                 wheelPropagation: true,
                 minScrollbarLength: 20
               })

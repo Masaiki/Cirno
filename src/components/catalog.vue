@@ -97,7 +97,7 @@ export default {
       this.visible = true
       this.$nextTick(() => {
         this.cataScroll = new PerfectScrollbar(this.$refs.bsWrapper, {
-          wheelSpeed: 2,
+          wheelSpeed: 1,
           wheelPropagation: true,
           minScrollbarLength: 20
         })

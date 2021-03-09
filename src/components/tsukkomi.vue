@@ -60,7 +60,7 @@ export default {
       this.text = text.trim()
       this.$nextTick(() => {
         this.textScroll = new PerfectScrollbar(this.$refs.text, {
-          wheelSpeed: 2,
+          wheelSpeed: 1,
           wheelPropagation: true,
           minScrollbarLength: 20
         })

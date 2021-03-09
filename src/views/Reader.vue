@@ -171,7 +171,7 @@ export default {
       chapterIndex: 0,
       chapter_info: {},
       chapterContentData: [],
-      // containerScroll: null,
+      containerScroll: null,
       tsukkomi_num: 0,
       tsukkomi_list: [],
       showTsukkomi: false,
@@ -307,11 +307,11 @@ export default {
       this.loading = 1
       this.$nextTick(() => {
         this.windowSizeHandler()
-        // this.containerScroll = new PerfectScrollbar(this.$refs.book, {
-        //   wheelSpeed: 2,
-        //   wheelPropagation: true,
-        //   minScrollbarLength: 20
-        // })
+        this.containerScroll = new PerfectScrollbar(this.$refs.book, {
+          wheelSpeed: 1,
+          wheelPropagation: true,
+          minScrollbarLength: 20
+        })
       })
     },
     decrypt(data, key) {
@@ -394,7 +394,7 @@ export default {
         this.loading = 0
         this.toChapterTop()
         this.toTsukkomiTop()
-        // this.containerScroll.destroy()
+        this.containerScroll.destroy()
         this.tsukkomiScroll ? this.tsukkomiScroll.destroy() : null
         this.chapterIndex++
         let cid = this.book_chapterids[this.chapterIndex]
@@ -409,7 +409,7 @@ export default {
       this.loading = 0
       this.toChapterTop()
       this.toTsukkomiTop()
-      // this.containerScroll.destroy()
+      this.containerScroll.destroy()
       this.getContent(cid)
       this.$router.replace({ query: { bid: this.bid, cid: cid } })
     },
@@ -459,6 +459,7 @@ export default {
       let reader_info = buy_result.data.reader_info
       this.$store.commit('setPropInfo', prop_info)
       this.$store.commit('setReaderInfo', reader_info)
+      this.containerScroll.destroy()
       this.getContent(this.cid)
     },
     giveTickets() {
@@ -487,7 +488,7 @@ export default {
 @contentWidth: calc(~'100% - 288px');
 .book-page {
   width: 100%;
-  // height: 100%;
+  height: 100%;
   background: #f6f7f9;
   overflow: hidden;
   position: relative;
