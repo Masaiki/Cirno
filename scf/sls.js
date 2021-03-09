@@ -60,7 +60,7 @@ router.get(`/api/*`, async (ctx, next) => {
       pathRewrite: { '^/api': '' },
       onProxyReq: (proxyReq, req, res) => {
         //伪造 ua 以正常访问图片
-        proxyReq.setHeader('User-Agent', 'Android  com.kuangxiangciweimao.novel  fake_server_by_scf')
+        proxyReq.setHeader('User-Agent', 'Android  com.kuangxiangciweimao.novel  fake_server_by_koa')
       },
       onProxyRes: (proxyRes, req, res) => {
         const oriWriteHead = res.writeHead

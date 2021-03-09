@@ -22,3 +22,4 @@ pnpm-debug.log*
 *.sw?
 dist.zip
 scf/.env
+scf/dist

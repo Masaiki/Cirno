@@ -32,8 +32,8 @@ let mixin = {
   timeout: 30000,
   withCredentials: true, //跨域请求是否使用凭证
   urlParas: {
-    app_version: '2.7.017',
-    device_token: 'ciweimao_scf_server'
+    app_version: '2.7.039',
+    device_token: 'ciweimao_koa_server'
   }
 }
 // http request 拦截
